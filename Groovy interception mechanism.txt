@@ -1,0 +1,30 @@
+@startuml
+start
+if (Calss implements GroovyInterceptable ?) then (yes)
+    : Call its invokeMethod();
+else (no)
+    if (Method exists in MetaClass or Class ?) then (yes)
+        : Call interceptor or original method;
+    else (no)
+        if (Property exists in MetaClass or Class ?) then (yes)
+            if (Is property type Closure ?) then (yes)
+                : Call closure's call() method;
+            else (no)
+                (A)
+            endif
+        else (no)
+            (A)
+            if (Has methodMissing() ?) then (yes)
+                :Call its methodMissing();
+            else (no)
+                if (Has invokeMethod()) then (yes)
+                    :Call its invokeMethod();
+                else (no)
+                    :Throw MissingMethodException();
+                endif
+            endif
+        endif
+    endif
+endif
+stop
+@enduml
