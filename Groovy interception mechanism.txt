@@ -1,6 +1,6 @@
 @startuml
 start
-if (Calss implements GroovyInterceptable ?) then (yes)
+if (Class implements GroovyInterceptable ?) then (yes)
     : Call its invokeMethod();
 else (no)
     if (Method exists in MetaClass or Class ?) then (yes)
